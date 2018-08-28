@@ -92,32 +92,32 @@ class Forward_LSTM(nn.Module):
 
         # LAYER 0
         # forget gate
-        f_g_l0 = F.sigmoid((torch.matmul(self.w_if_l0, inp) + self.b_if_l0) + (torch.matmul(self.w_hf_l0 , h0_l0) + self.b_hf_l0))
+        f_g_l0 = torch.sigmoid((torch.matmul(self.w_if_l0, inp) + self.b_if_l0) + (torch.matmul(self.w_hf_l0 , h0_l0) + self.b_hf_l0))
         # input gate
-        i_g_l0 = F.sigmoid((torch.matmul(self.w_ii_l0,inp) + self.b_ii_l0) + (torch.matmul(self.w_hi_l0, h0_l0) + self.b_hi_l0))
+        i_g_l0 = torch.sigmoid((torch.matmul(self.w_ii_l0,inp) + self.b_ii_l0) + (torch.matmul(self.w_hi_l0, h0_l0) + self.b_hi_l0))
         # output gate
-        o_g_l0 = F.sigmoid((torch.matmul(self.w_io_l0, inp) + self.b_io_l0) + (torch.matmul(self.w_ho_l0, h0_l0) + self.b_ho_l0))
+        o_g_l0 = torch.sigmoid((torch.matmul(self.w_io_l0, inp) + self.b_io_l0) + (torch.matmul(self.w_ho_l0, h0_l0) + self.b_ho_l0))
         # intermediate cell state
-        c_tilde_l0 = F.tanh((torch.matmul(self.w_ig_l0, inp) + self.b_ig_l0) + (torch.matmul(self.w_hg_l0, h0_l0) + self.b_hg_l0))
+        c_tilde_l0 = torch.tanh((torch.matmul(self.w_ig_l0, inp) + self.b_ig_l0) + (torch.matmul(self.w_hg_l0, h0_l0) + self.b_hg_l0))
         # current cell state
         cx_l0 = f_g_l0 * c0_l0 + i_g_l0 * c_tilde_l0
         # hidden state
-        hx_l0 = o_g_l0 * F.tanh(cx_l0)
+        hx_l0 = o_g_l0 * torch.tanh(cx_l0)
 
 
         # LAYER 1
         # forget gate
-        f_g_l1 = F.sigmoid((torch.matmul(self.w_if_l1  , hx_l0)+ self.b_if_l1) + (torch.matmul(self.w_hf_l1, h0_l1) + self.b_hf_l1))
+        f_g_l1 = torch.sigmoid((torch.matmul(self.w_if_l1  , hx_l0)+ self.b_if_l1) + (torch.matmul(self.w_hf_l1, h0_l1) + self.b_hf_l1))
         # input gate 
-        i_g_l1 = F.sigmoid((torch.matmul(self.w_ii_l1  , hx_l0)+ self.b_ii_l1) + (torch.matmul(self.w_hi_l1, h0_l1) + self.b_hi_l1))
+        i_g_l1 = torch.sigmoid((torch.matmul(self.w_ii_l1  , hx_l0)+ self.b_ii_l1) + (torch.matmul(self.w_hi_l1, h0_l1) + self.b_hi_l1))
         # output gate 
-        o_g_l1 = F.sigmoid((torch.matmul(self.w_io_l1  , hx_l0) + self.b_io_l1) + (torch.matmul(self.w_ho_l1, h0_l1) + self.b_ho_l1))
+        o_g_l1 = torch.sigmoid((torch.matmul(self.w_io_l1  , hx_l0) + self.b_io_l1) + (torch.matmul(self.w_ho_l1, h0_l1) + self.b_ho_l1))
         # intermediate cell state
-        c_tilde_l1 = F.tanh((torch.matmul(self.w_ig_l1 , hx_l0)+ self.b_ig_l1) + (torch.matmul(self.w_hg_l1, h0_l1) + self.b_hg_l1))
+        c_tilde_l1 = torch.tanh((torch.matmul(self.w_ig_l1 , hx_l0)+ self.b_ig_l1) + (torch.matmul(self.w_hg_l1, h0_l1) + self.b_hg_l1))
         # current cell state
         cx_l1 = f_g_l1 * c0_l1 + i_g_l1 * c_tilde_l1
         # hidden state
-        hx_l1 = o_g_l1 * F.tanh(cx_l1)
+        hx_l1 = o_g_l1 * torch.tanh(cx_l1)
 
         out = torch.matmul(self.w_decoder, hx_l1) + self.b_decoder
 
