@@ -150,9 +150,9 @@ def main(
                         relevant_activations[act], dtype=torch.double), requires_grad=True)
 
                     total_prob = torch.tensor(1.0, dtype=torch.double)
-                    class_0_prob = torch.dot(weight, current_activation) + bias
-                    class_0_prob = F.sigmoid(class_0_prob)
-                    class_1_prob = total_prob - class_0_prob
+                    class_1_prob = torch.dot(weight, current_activation) + bias
+                    class_1_prob = F.sigmoid(class_1_prob)
+                    class_0_prob = total_prob - class_1_prob
 
                     class_0_log_prob = torch.log(class_0_prob)
                     class_1_log_prob = torch.log(class_1_prob)
@@ -161,13 +161,13 @@ def main(
                     optimiser = torch.optim.SGD(params, lr=learning_rate) 
                     optimiser.zero_grad()
 
-                    prediction = (class_1_log_prob, class_0_log_prob)
+                    prediction = (class_0_log_prob, class_1_log_prob)
                     prediction = torch.tensor(
                         torch.cat(prediction)).unsqueeze(0)
 
                     # unsupervised intervention requires generated labels
                     if generate_labels:
-                        label = 1 if class_0_prob > class_1_prob else 0
+                        label = 0 if class_0_prob > class_1_prob else 1
 
                     gold_label = torch.tensor(label).unsqueeze(0)
 
