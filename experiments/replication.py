@@ -158,7 +158,7 @@ def main(
                     class_1_log_prob = torch.log(class_1_prob)
 
                     params = [current_activation]
-                    optimiser = torch.optim.SGD(params, lr=lr) 
+                    optimiser = torch.optim.SGD(params, lr=learning_rate) 
                     optimiser.zero_grad()
 
                     prediction = (class_1_log_prob, class_0_log_prob)
