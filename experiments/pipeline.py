@@ -4,8 +4,8 @@ from diagnostic_classifiers import diagnostic_experiment
 import plotting
 
 DATASET_PATH = '../data/treebank/parsed_subj_verb_dataset.tsv'
-W2I_DICT_PATH = '../models/vocab_hidden650_batch128_dropout0.2_lr20.0.txt'
-MODEL_PATH = '../models/hidden650_batch128_dropout0.2_lr20.0.pt'
+W2I_DICT_PATH = '../models/colorlessgreenRNNs/vocab_hidden650_batch128_dropout0.2_lr20.0.txt'
+MODEL_PATH = '../models/colorlessgreenRNNs/hidden650_batch128_dropout0.2_lr20.0.pt'
 VOCAB_SIZE = 50001
 HIDDEN_SIZE = 650
 NUM_WORDS_BEFORE_SUBJECT = 0

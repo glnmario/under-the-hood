@@ -4,7 +4,7 @@ import numpy as np
 
 import os
 import sys
-sys.path.append("../../neural_nets/")
+sys.path.append("../experiments/")
 
 from lstm import Forward_LSTM
 from collections import Counter, defaultdict
@@ -19,7 +19,7 @@ from torch.autograd import Variable
 VOCAB_SIZE = 50001
 HIDDEN_SIZE = 650
 
-AVG_INIT = True
+AVG_INIT = False
 ####################
 
 
@@ -69,7 +69,7 @@ def extract_data(filepath, mode, vocab_size, hidden_size, context_len_before_sub
     lstm = Forward_LSTM(vocab_size, hidden_size, hidden_size, vocab_size, w2i_dict_path, model_path)
 
     if AVG_INIT:
-        with open('../../models/our_hidden.pickle', 'rb') as f_hid:
+        with open('../models/our_hidden.pickle', 'rb') as f_hid:
             h_list = pickle.load(f_hid)
         h0_l0_ = h_list[0]
         c0_l0_ = h_list[1]
@@ -188,7 +188,7 @@ def extract_and_modify_data(filepath, mode, vocab_size, hidden_size, context_len
     lstm = Forward_LSTM(vocab_size, hidden_size, hidden_size, vocab_size, w2i_dict_path, model_path)
 
     if AVG_INIT:
-        with open('../../models/our_hidden.pickle', 'rb') as f_hid:
+        with open('../models/our_hidden.pickle', 'rb') as f_hid:
             h_list = pickle.load(f_hid)
         h0_l0_ = h_list[0]
         c0_l0_ = h_list[1]
@@ -389,7 +389,7 @@ def extract_multi_class_data(filepath, mode, vocab_size, hidden_size, context_le
     lstm = Forward_LSTM(vocab_size, hidden_size, hidden_size, vocab_size, w2i_dict_path, model_path)
 
     if AVG_INIT:
-        with open('../../models/our_hidden.pickle', 'rb') as f_hid:
+        with open('../models/our_hidden.pickle', 'rb') as f_hid:
             h_list = pickle.load(f_hid)
 
         h0_l0_ = h_list[0]

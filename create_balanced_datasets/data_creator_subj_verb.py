@@ -7,9 +7,9 @@ import torch.nn.functional as F
 # Parameters
 ##################################################################################
 
-dataset_path_ = '../../../data/treebank/parsed_subj_verb_dataset.tsv'
-w2i_dict_path_ = '../../../models/vocab_hidden650_batch128_dropout0.2_lr20.0.txt'
-model_path_ = '../../../models/hidden650_batch128_dropout0.2_lr20.0.pt'
+dataset_path_ = '../data/treebank/parsed_subj_verb_dataset.tsv'
+w2i_dict_path_ = '../models/colorlessgreenRNNs/vocab_hidden650_batch128_dropout0.2_lr20.0.txt'
+model_path_ = '../models/colorlessgreenRNNs/hidden650_batch128_dropout0.2_lr20.0.pt'
 ##################################################################################
 
 
@@ -107,7 +107,7 @@ def create_dataset(lstm_mode,
     unk_idx = w2i['<unk>']
 
     if lstm_mode != 'mixed':
-        with open('../../data/linzen_testset/subj_agr_filtered.gold', 'r') as f:
+        with open('../data/linzen-testset/subj_agr_filtered.gold', 'r') as f:
             lines = f.readlines()[1:]
 
         correct2wrong = {}
